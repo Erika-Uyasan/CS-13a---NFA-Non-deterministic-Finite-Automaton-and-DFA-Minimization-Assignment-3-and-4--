@@ -1,0 +1,44 @@
+class DFA:
+    def __init__(self):
+        self.start_state = 'AB'
+        self.accept_states = {'CDE'}
+        
+        # Transition function delta(state, symbol)
+        self.transitions = {
+            'AB':  {'0': 'AB',  '1': 'CDE'},
+            'CDE': {'0': 'CDE', '1': 'F'},
+            'F':   {'0': 'F',   '1': 'F'}
+        }
+
+    def accepts(self, input_string: str) -> bool:
+        current_state = self.start_state
+
+        for char in input_string:
+            if char not in ('0', '1'):
+                return False  # Reject characters outside alphabet {0, 1}
+            
+            current_state = self.transitions[current_state][char]
+
+        return current_state in self.accept_states
+
+
+# --- Interactive Simulator ---
+if __name__ == "__main__":
+    automaton = DFA()
+    print("==========================================")
+    print("       DFA Simulator ({0, 1})             ")
+    print("==========================================")
+    print("Type any binary string to test.")
+    print("Type 'exit' to quit.\n")
+
+    while True:
+        user_input = input("Enter binary string: ").strip()
+        
+        if user_input.lower() == 'exit':
+            print("Exiting simulator.")
+            break
+
+        if automaton.accepts(user_input):
+            print("--> Result: ACCEPTED ✅\n")
+        else:
+            print("--> Result: REJECTED ❌\n")
