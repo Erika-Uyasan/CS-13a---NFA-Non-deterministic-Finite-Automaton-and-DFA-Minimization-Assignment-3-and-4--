@@ -8,8 +8,9 @@
 
 # Minimization of DFA
 
+
 # Assignment #4
-<img width="2082" height="3207" alt="image" src="https://github.com/user-attachments/assets/0d902108-1009-45c1-87dc-74337021585e" />
+<img width="1310" height="2046" alt="image" src="https://github.com/user-attachments/assets/f8dc9490-385a-4883-82f4-bb98804503cc" />
 
 # Program - Accepts & Rejects
 
