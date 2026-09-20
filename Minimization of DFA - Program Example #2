@@ -1,0 +1,46 @@
+class DFA:
+    def __init__(self):
+        self.start_state = 'A'
+        self.accept_states = {'DF'}
+        
+        # Transition function mapping: state -> {input: next_state}
+        self.transitions = {
+            'A':  {'0': 'B',  '1': 'DF'},
+            'B':  {'0': 'A',  '1': 'DF'},
+            'C':  {'0': 'B',  '1': 'E'},
+            'E':  {'0': 'DF', '1': 'DF'},
+            'DF': {'0': 'DF', '1': 'DF'},
+        }
+
+    def accepts(self, input_string: str) -> bool:
+        current_state = self.start_state
+
+        for char in input_string:
+            if char not in ('0', '1'):
+                return False  # Rejects characters outside the alphabet {0, 1}
+            
+            current_state = self.transitions[current_state][char]
+
+        return current_state in self.accept_states
+
+
+# --- Interactive Terminal Simulator ---
+if __name__ == "__main__":
+    automaton = DFA()
+    print("==========================================")
+    print("       DFA Simulator ({0, 1})             ")
+    print("==========================================")
+    print("Type any binary string to test.")
+    print("Type 'exit' to quit.\n")
+
+    while True:
+        user_input = input("Enter binary string: ").strip()
+        
+        if user_input.lower() == 'exit':
+            print("Exiting simulator.")
+            break
+
+        if automaton.accepts(user_input):
+            print("--> Result: ACCEPTED ✅\n")
+        else:
+            print("--> Result: REJECTED ❌\n")
